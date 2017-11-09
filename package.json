@@ -1,36 +1,36 @@
 {
-  "name": "sort-json",
-  "version": "1.5.2",
-  "description": "Takes a json-file and return a copy of the same file, but sorted",
-  "main": "index.js",
-  "dependencies": {
-    "lodash": "^4.17.4"
-  },
-  "bin": {
-    "sort-json": "./app/cmd.js"
-  },
-  "devDependencies": {
-    "chai": "^3.5.0",
-    "dirty-chai": "^1.2.2",
-    "eslint": "^3.8.1",
-    "eslint-config-airbnb": "^12.0.0",
-    "eslint-plugin-import": "^1.16.0",
-    "eslint-plugin-jsx-a11y": "^2.2.3",
-    "eslint-plugin-react": "^6.4.1",
-    "mocha": "^3.5.0"
-  },
-  "scripts": {
-    "test": "mocha tests",
-    "lint": "eslint tests"
-  },
-  "repository": {
-    "type": "git",
-    "url": "https://github.com/kesla/sort-json.git"
-  },
-  "author": "David Björklund <david.bjorklund@gmail.com>",
-  "license": "MIT",
-  "bugs": {
-    "url": "https://github.com/kesla/sort-json/issues"
-  },
-  "homepage": "https://github.com/kesla/sort-json"
+	"name": "sort-json",
+	"version": "1.5.2",
+	"description": "Takes a json-file and return a copy of the same file, but sorted",
+	"main": "index.js",
+	"dependencies": {
+		"lodash": "^4.17.4"
+	},
+	"bin": {
+		"sort-json": "./app/cmd.js"
+	},
+	"devDependencies": {
+		"chai": "^4.1.2",
+		"dirty-chai": "^2.0.1",
+		"eslint": "^4.10.0",
+		"eslint-config-airbnb": "^16.1.0",
+		"eslint-plugin-import": "^2.8.0",
+		"eslint-plugin-jsx-a11y": "^6.0.2",
+		"eslint-plugin-react": "^7.4.0",
+		"mocha": "^4.0.1"
+	},
+	"scripts": {
+		"test": "mocha tests",
+		"lint": "eslint tests"
+	},
+	"repository": {
+		"type": "git",
+		"url": "https://github.com/kesla/sort-json.git"
+	},
+	"author": "David Björklund <david.bjorklund@gmail.com>",
+	"license": "MIT",
+	"bugs": {
+		"url": "https://github.com/kesla/sort-json/issues"
+	},
+	"homepage": "https://github.com/kesla/sort-json"
 }

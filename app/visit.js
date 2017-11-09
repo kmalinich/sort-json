@@ -10,30 +10,28 @@
  *                                            returns whatever was passed
  */
 function visit(old, options) {
-  options = options || {};
-  var ignoreCase = options.ignoreCase || false;
-  var reverse = options.reverse || false;
+	options = options || {};
 
-  if (typeof(old) !== 'object' || old === null) {
-    return old;
-  }
+	let ignoreCase = options.ignoreCase || false;
+	let reverse    = options.reverse    || false;
 
-  var copy = Array.isArray(old) ? [] : {};
-  var keys = ignoreCase ?
-    Object.keys(old).sort(function (a, b) {
-      return a.toLowerCase().localeCompare(b.toLowerCase());
-    }) :
-    Object.keys(old).sort();
+	if (typeof (old) !== 'object' || old === null) return old;
 
-  if (reverse) {
-    keys = keys.reverse();
-  }
+	let copy = Array.isArray(old) ? [] : {};
 
-  keys.forEach(function (key) {
-    copy[key] = visit(old[key], options);
-  });
+	let keys = ignoreCase
+		? Object.keys(old).sort((a, b) => {
+			return a.toLowerCase().localeCompare(b.toLowerCase());
+		})
+		: Object.keys(old).sort();
 
-  return copy;
+	if (reverse) keys = keys.reverse();
+
+	keys.forEach((key) => {
+		copy[key] = visit(old[key], options);
+	});
+
+	return copy;
 }
 
 module.exports = visit;
