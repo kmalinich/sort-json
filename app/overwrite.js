@@ -1,15 +1,25 @@
-let fs    = require('fs');
-let visit = require('./visit');
+let fs     = require('fs');
+let indent = require('detect-indent');
+let visit  = require('./visit');
 
 function validateJSON(jsonFile) {
 	try {
-		let jsonData = JSON.parse(fs.readFileSync(jsonFile, 'utf8'));
 		// Data is valid JSON
-		return jsonData;
+		let fileData = fs.readFileSync(jsonFile, 'utf8');
+		let jsonData = JSON.parse(fileData);
+
+		// Try to detect the indentation method, fall back to two spaces if not possible
+		let fileIndent = indent(fileData).indent || '  ';
+
+		return {
+			data   : jsonData,
+			indent : fileIndent,
+			valid  : true,
+		};
 	}
 	catch (e) {
 		// Data is NOT valid JSON
-		return false;
+		return { valid : false };
 	}
 }
 
@@ -38,7 +48,7 @@ function overwrite(absolutePaths, options) {
 function overwriteFile(p, options) {
 	let jsonData = validateJSON(p);
 
-	if (jsonData === false) {
+	if (jsonData.valid === false) {
 		console.error('Error: File \'%s\' does not appear to be a valid JSON file, cannot continue', p);
 		return false;
 	}
@@ -46,14 +56,15 @@ function overwriteFile(p, options) {
 	let newData = null;
 
 	try {
-		newData = visit(jsonData, options);
+		newData = visit(jsonData.data, options);
 	}
 	catch (e) {
 		console.error('Error: Failed to retrieve JSON object from file, cannot continue');
 		throw e;
 	}
 
-	let newJson = JSON.stringify(newData, null, 2);
+	// Write sorted JSON string with original indentation
+	let newJson = JSON.stringify(newData, null, jsonData.indent);
 
 	// Append new line at EOF
 	let content = newJson[newJson.length - 1] === '\n' ? newJson : newJson + '\n';
