@@ -13,7 +13,7 @@ let sortJson = require('./');
 let rc_regexp = /\..*.[rc]$/g;
 
 // Get all the files
-let files = process.argv.slice(0).filter(arg => arg.endsWith('.json') || arg.endsWith('.rc') || arg.match(rc_regexp));
+let files = process.argv.slice(0).filter(arg => arg.endsWith('.json') || arg.endsWith('.rc') || arg === 'tiddlywiki.info' || arg.match(rc_regexp));
 
 // CLI arguments
 let ignoreCase = _.includes(process.argv, '--ignore-case') || _.includes(process.argv, '-i');
