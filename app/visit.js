@@ -16,17 +16,17 @@ function visit(old, options) {
 
 	if (typeof (old) !== 'object' || old === null) return old;
 
-	let copy = Array.isArray(old) ? [] : {};
+	const copy = Array.isArray(old) ? [] : {};
 
 	let keys;
 	const oldKeys = Object.keys(old);
 
 	switch (options.ignoreCase) {
 		case true : {
-			keys = oldKeys.sort((a, b) => {
+			keys = oldKeys.sort((a, b) =>
 				// console.log('        visit oldKeys.sort(%s, %s) (%s, %s) =>', a, b, a.toLowerCase(), b.toLowerCase(), a.toLowerCase().localeCompare(b.toLowerCase()));
-				return a.toLowerCase().localeCompare(b.toLowerCase());
-			});
+				a.toLowerCase().localeCompare(b.toLowerCase())
+			);
 
 			break;
 		}

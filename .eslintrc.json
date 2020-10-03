@@ -3,17 +3,22 @@
 		"browser": false,
 		"es6": true,
 		"jquery": false,
-		"mocha": true,
 		"node": true,
+		"serviceworker": false,
 		"worker": false
 	},
 	"extends": [
-		"eslint:recommended"
+		"eslint:recommended",
+		"esnext"
 	],
-	"globals": {
-	},
+	"globals": {},
 	"parserOptions": {
-		"ecmaVersion": 6,
+		"ecmaFeatures": {
+			"globalReturn": false,
+			"impliedStrict": true,
+			"jsx": false
+		},
+		"ecmaVersion": 11,
 		"sourceType": "module"
 	},
 	"plugins": [
@@ -23,7 +28,6 @@
 		"standard"
 	],
 	"rules": {
-		"no-console": 0,
 		"accessor-pairs": "error",
 		"array-bracket-spacing": [
 			"error",
@@ -47,7 +51,8 @@
 				"allowSingleLine": true
 			}
 		],
-		"camelcase": 0,
+		"camelcase": "off",
+		"class-methods-use-this": "off",
 		"comma-dangle": [
 			"error",
 			{
@@ -79,7 +84,7 @@
 			"property"
 		],
 		"eol-last": "error",
-		"eqeqeq": 0,
+		"eqeqeq": "warn",
 		"func-call-spacing": [
 			"error",
 			"never"
@@ -97,7 +102,10 @@
 		],
 		"import/export": "error",
 		"import/first": "error",
+		"import/no-amd": "warn",
+		"import/no-commonjs": "off",
 		"import/no-duplicates": "error",
+		"import/no-nodejs-modules": "off",
 		"import/no-webpack-loader-syntax": "error",
 		"indent": [
 			"error",
@@ -131,9 +139,9 @@
 			"error",
 			"unix"
 		],
-		"new-cap": 0,
+		"new-cap": "off",
 		"new-parens": "error",
-		"newline-per-chained-call": 0,
+		"newline-per-chained-call": "off",
 		"no-array-constructor": "error",
 		"no-caller": "error",
 		"no-class-assign": "error",
@@ -209,7 +217,7 @@
 			}
 		],
 		"no-mixed-spaces-and-tabs": "error",
-		"no-multi-spaces": 0,
+		"no-multi-spaces": "off",
 		"no-multi-str": "error",
 		"no-multiple-empty-lines": [
 			"error",
@@ -243,7 +251,7 @@
 		"no-sequences": "error",
 		"no-shadow-restricted-names": "error",
 		"no-sparse-arrays": "error",
-		"no-tabs": 0,
+		"no-tabs": "off",
 		"no-template-curly-in-string": "error",
 		"no-this-before-super": "error",
 		"no-throw-literal": "error",
@@ -445,5 +453,14 @@
 			"error",
 			"never"
 		]
+	},
+	"settings": {
+		"import/resolver": {
+			"node": {
+				"moduleDirectory": [
+					"node_modules"
+				]
+			}
+		}
 	}
 }

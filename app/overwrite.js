@@ -1,6 +1,6 @@
-let fs     = require('fs');
-let indent = require('detect-indent');
-let visit  = require('./visit');
+const fs     = require('fs');
+const indent = require('detect-indent');
+const visit  = require('./visit');
 
 
 function arrIfNot(x) {
@@ -13,11 +13,11 @@ function arrIfNot(x) {
 function validateJSON(jsonFile) {
 	try {
 		// Data is valid JSON
-		let fileData = fs.readFileSync(jsonFile, 'utf8');
-		let jsonData = JSON.parse(fileData);
+		const fileData = fs.readFileSync(jsonFile, 'utf8');
+		const jsonData = JSON.parse(fileData);
 
 		// Try to detect the indentation method, fall back to tab if indent style not detected
-		let fileIndent = indent(fileData).indent || '\t';
+		const fileIndent = indent(fileData).indent || '\t';
 
 		return {
 			data   : jsonData,
@@ -42,7 +42,7 @@ function validateJSON(jsonFile) {
 function overwrite(absolutePaths, options) {
 	absolutePaths = arrIfNot(absolutePaths);
 
-	let results = absolutePaths.map(p => overwriteFile(p, options));
+	const results = absolutePaths.map(p => overwriteFile(p, options));
 
 	return results.length > 1 ? results : results[0];
 }
@@ -54,7 +54,7 @@ function overwrite(absolutePaths, options) {
  * @returns {*}
  */
 function overwriteFile(filePath, options) {
-	let jsonData = validateJSON(filePath);
+	const jsonData = validateJSON(filePath);
 
 	if (jsonData.valid !== true) {
 		console.error('Error: File \'%s\' does not appear to be a valid JSON file, cannot continue', filePath);
@@ -76,10 +76,10 @@ function overwriteFile(filePath, options) {
 	// return newData;
 
 	// Write sorted JSON string with original indentation
-	let newJson = JSON.stringify(newData, null, jsonData.indent);
+	const newJson = JSON.stringify(newData, null, jsonData.indent);
 
 	// Append new line at EOF
-	let content = newJson[newJson.length - 1] === '\n' ? newJson : newJson + '\n';
+	const content = newJson[newJson.length - 1] === '\n' ? newJson : newJson + '\n';
 
 	fs.writeFileSync(filePath, content, 'utf8');
 

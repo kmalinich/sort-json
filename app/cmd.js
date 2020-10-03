@@ -1,19 +1,19 @@
 #!/usr/bin/env node
 
-/* eslint-disable no-use-before-define */
-
 // Core dependencies
-let path = require('path');
-let _    = require('lodash');
+const path = require('path');
 
 // NPM dependencies
-let sortJson = require('./');
+const sortJson = require('./');
+
 
 // JSON rcfile regexp
-let rcRegexp = /\..*.[rc]$/g;
+const rcRegexp = /\..*.[rc]$/g;
+
+const args = process.argv.slice(0);
 
 // Get all the files
-let files = process.argv.slice(0).filter(arg => {
+const files = args.filter(arg => {
 	const argSkip0 = arg === '--ignore-case' || arg === '-i';
 	const argSkip1 = arg === '--reverse'     || arg === '-r';
 
@@ -38,8 +38,8 @@ let files = process.argv.slice(0).filter(arg => {
 
 	const argCheck0 = pathParse.ext === '.json';
 	const argCheck1 = pathParse.ext === '.rc';
-	const argCheck2 = pathParse.base.startsWith('esphome.');
-	const argCheck3 = pathParse.base === 'tiddlywiki.info';
+	const argCheck2 = pathParse.base === 'tiddlywiki.info';
+	const argCheck3 = pathParse.base.startsWith('esphome.');
 	const argCheck4 = (pathParse.base.match(rcRegexp) !== null);
 
 	const argCheckAny = (argCheck0 || argCheck1 || argCheck2 || argCheck3 || argCheck4);
@@ -59,13 +59,15 @@ let files = process.argv.slice(0).filter(arg => {
 
 
 // CLI arguments
-let ignoreCase = _.includes(process.argv, '--ignore-case') || _.includes(process.argv, '-i');
-let reverse    = _.includes(process.argv, '--reverse')     || _.includes(process.argv, '-r');
+const options = {
+	ignoreCase : args.includes('--ignore-case') || args.includes('-i'),
+	reverse    : args.includes('--reverse')     || args.includes('-r'),
+};
 
 if (files.length === 0) {
-	console.log('Error : No files to process, cannot continue');
+	console.log('Error: No files to process, cannot continue');
 	process.exit(1);
 }
 
 
-sortJson.overwrite(files.map(f => path.resolve(f)), { ignoreCase, reverse });
+sortJson.overwrite(files.map(f => path.resolve(f)), options);
