@@ -39,10 +39,12 @@ const files = args.filter(arg => {
 	const argCheck0 = pathParse.ext === '.json';
 	const argCheck1 = pathParse.ext === '.rc';
 	const argCheck2 = pathParse.base === 'tiddlywiki.info';
-	const argCheck3 = pathParse.base.startsWith('esphome.');
-	const argCheck4 = (pathParse.base.match(rcRegexp) !== null);
+	const argCheck3 = pathParse.base === 'lovelace';
+	const argCheck4 = pathParse.base.startsWith('core.');
+	const argCheck5 = pathParse.base.startsWith('esphome.');
+	const argCheck6 = (pathParse.base.match(rcRegexp) !== null);
 
-	const argCheckAny = (argCheck0 || argCheck1 || argCheck2 || argCheck3 || argCheck4);
+	const argCheckAny = (argCheck0 || argCheck1 || argCheck2 || argCheck3 || argCheck4 || argCheck5 || argCheck6);
 
 	// console.log({
 	// 	argInfo : {
@@ -50,7 +52,7 @@ const files = args.filter(arg => {
 
 	// 		pathParse,
 
-	// 		argCheck0, argCheck1, argCheck2, argCheck3, argCheck4, argCheckAny,
+	// 		argCheck0, argCheck1, argCheck2, argCheck3, argCheck4, argCheck5, argCheck6, argCheckAny,
 	// 	},
 	// });
 

@@ -39,5 +39,5 @@
 		"lint": "eslint tests",
 		"test": "mocha tests"
 	},
-	"version": "1.7.1"
+	"version": "1.7.2"
 }
