@@ -67,6 +67,7 @@ async function asyncRun() {
 			if (argSkipAnyPt2) return false;
 
 
+			// This has really gotten wasteful........
 			const argCheck0 = (pathParse.base.match(rcRegexp) !== null);
 
 			const argCheck1 = pathParse.ext === '.json';
@@ -78,6 +79,7 @@ async function asyncRun() {
 
 			const argCheck6 = pathParse.base.startsWith('core.');
 			const argCheck7 = pathParse.base.startsWith('esphome.');
+			const argCheck8 = pathParse.base.startsWith('lovelace.');
 
 			const mimeType = await new Promise((resolve, reject) => {
 				magic.detectFile(argNormalized, (detectError, detectResult) => {
@@ -86,9 +88,9 @@ async function asyncRun() {
 				});
 			});
 
-			const argCheck8 = (mimeType === 'application/json');
+			const argCheck9 = (mimeType === 'application/json');
 
-			const argCheckAny = (argCheck0 || argCheck1 || argCheck2 || argCheck3 || argCheck4 || argCheck5 || argCheck6 || argCheck7 || argCheck8);
+			const argCheckAny = (argCheck0 || argCheck1 || argCheck2 || argCheck3 || argCheck4 || argCheck5 || argCheck6 || argCheck7 || argCheck8 || argCheck9);
 
 			// console.log({
 			// 	argInfo2 : {
@@ -108,6 +110,7 @@ async function asyncRun() {
 			// 			argCheck6,
 			// 			argCheck7,
 			// 			argCheck8,
+			// 			argCheck9,
 			// 		],
 
 			// 		argCheckAny,
